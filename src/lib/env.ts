@@ -18,6 +18,17 @@ export const PostgresConfig = {
   ),
 };
 
+export const RedisConfig = {
+  REDIS_HOST: process.env.REDIS_HOST!,
+  REDIS_PASS: process.env.REDIS_PASS,
+};
+
+export const AWSConfig = {
+  AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY!,
+  AWS_ACCESS_KEY_SECRET: process.env.AWS_ACCESS_KEY_SECRET!,
+  AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME!,
+};
+
 export const OAuthConfig = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,

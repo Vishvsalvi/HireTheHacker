@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FileUp, Upload, CheckCircle, AlertCircle } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
 import { LoadingScreen } from "@/components/loading-screen"
+import { toast } from "sonner"
 
 export default function AddResumePage() {
   const [activeTab, setActiveTab] = useState("upload")
@@ -70,11 +71,31 @@ export default function AddResumePage() {
   }
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     // Show loading state
     setLoading(true)
+
+
+    const formData = new FormData()
+
+    formData.set("jobTitle", jobTitle)
+    formData.set("jobDescription", jobDescription)
+
+    files.forEach(file => formData.append("files", file))
+
+    const request = await fetch("/api/upload", { method: "POST", body: formData })
+
+    const response = await request.json()
+
+    if (!request.ok) {
+      toast("File upload failed", { description: response.message })
+    } else {
+      toast("File upload successful!!!", { description: response.message })
+    }
+
+    console.log(response)
 
     // In a real app, this would upload the files to a server
     // For demo purposes, we'll simulate a successful upload
@@ -165,7 +186,7 @@ export default function AddResumePage() {
                         accept=".pdf,.doc,.docx"
                         onChange={handleChange}
                       />
-                      <Button variant="outline" onClick={() => document.getElementById("resume-upload")?.click()}>
+                      <Button type="button" variant="outline" onClick={() => document.getElementById("resume-upload")?.click()}>
                         Select Files
                       </Button>
                       <p className="text-xs text-gray-500 mt-2">Supported formats: PDF, DOC, DOCX</p>
@@ -207,7 +228,7 @@ export default function AddResumePage() {
                         <Upload className="mx-auto h-12 w-12 text-gray-400 mb-2" />
                         <p className="text-sm text-gray-500 mb-4">Upload a ZIP file containing multiple resumes</p>
                         <Input id="bulk-upload" type="file" className="hidden" accept=".zip" />
-                        <Button variant="outline" onClick={() => document.getElementById("bulk-upload")?.click()}>
+                        <Button type="button" variant="outline" onClick={() => document.getElementById("bulk-upload")?.click()}>
                           Upload ZIP
                         </Button>
                       </div>
