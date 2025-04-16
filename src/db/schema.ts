@@ -9,7 +9,6 @@ import {
   jsonb,
   doublePrecision,
 } from "drizzle-orm/pg-core";
-import { matchesGlob } from "path";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -84,8 +83,8 @@ export const candidate = pgTable("candidate", {
   contactDetails: jsonb("contact_details"),
   professionalTitle: text("professional_title"),
   professionalSummary: text("professional_summary"),
-  socialLinks: text("social_links").array().default([]),
-  projectLinks: text("project_links").array().default([]),
+  socialLinks: jsonb("social_links"),
+  projectLinks: jsonb("project_links"),
   experience: text("experience"),
   education: text("education"),
   totalExperience: doublePrecision("total_experience"),
