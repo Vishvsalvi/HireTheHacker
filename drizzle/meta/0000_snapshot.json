@@ -1,5 +1,5 @@
 {
-  "id": "97dbaabe-9963-4834-81b1-a87c87038ca2",
+  "id": "2351f4af-eab6-406c-880e-cc47231b66db",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -179,6 +179,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "skills": {
+          "name": "skills",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "tech_stack": {
           "name": "tech_stack",
           "type": "text[]",
@@ -196,6 +202,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "embeddings": {
+          "name": "embeddings",
+          "type": "vector(1536)",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",

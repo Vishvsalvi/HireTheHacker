@@ -26,9 +26,11 @@ CREATE TABLE "candidate" (
 	"education" text,
 	"total_experience" double precision,
 	"exceptional_ability" text,
+	"skills" text,
 	"tech_stack" text[],
 	"resume_url" text NOT NULL,
 	"resume_hash" text NOT NULL,
+	"embeddings" vector(1536),
 	"created_at" timestamp DEFAULT now(),
 	"updated_at" timestamp DEFAULT now()
 );
